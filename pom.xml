@@ -2,11 +2,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.zzh</groupId>
-    <artifactId>micro-platform-starter</artifactId>
+    <artifactId>micro-starter</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>micro-platform-starter</name>
-    <url>https://github.com/JeffyZhuang/micro-platform-starter</url>
+    <url>https://github.com/JeffyZhuang/micro-starter</url>
     <description>Capture Java and Spring exceptions automatically</description>
     <licenses>
         <license>
@@ -17,8 +17,8 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/JeffyZhuang/micro-platform-starter</url>
-        <connection>https://github.com/JeffyZhuang/micro-platform-starter.git</connection>
+        <url>https://github.com/JeffyZhuang/micro-starter</url>
+        <connection>https://github.com/JeffyZhuang/micro-starter.git</connection>
     </scm>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
