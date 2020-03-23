@@ -1,47 +1,30 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.zzh</groupId>
+
+    <groupId>com.github.jeffyzhuang</groupId>
     <artifactId>micro-starter</artifactId>
-    <version>1.0.0</version>
-    <packaging>pom</packaging>
-    <name>micro-platform-starter</name>
-    <url>https://github.com/JeffyZhuang/micro-starter</url>
-    <description>Capture Java and Spring exceptions automatically</description>
-    <licenses>
-        <license>
-            <name>Server Side Public License</name>
-            <url>https://www.mongodb.com/licensing/server-side-public-license</url>
-            <distribution>repo</distribution>
-            <comments>A not business-friendly OSS license</comments>
-        </license>
-    </licenses>
-    <scm>
-        <url>https://github.com/JeffyZhuang/micro-starter</url>
-        <connection>https://github.com/JeffyZhuang/micro-starter.git</connection>
-    </scm>
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.deploy.skip>true</maven.deploy.skip>
-    </properties>
-    <developers>
-        <developer>
-            <name>JeffyZhuang</name>
-            <id>JeffyZhuang</id>
-            <email>270225738@qq.com</email>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-    </developers>
+    <version>0.0.1-RELEASE</version>
+    <packaging>jar</packaging>
+
+    <name>micro-starter</name>
+    <description>Demo project for Spring Boot</description>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <profiles>
         <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <id>release</id>
             <build>
                 <plugins>
                     <plugin>
@@ -50,7 +33,7 @@
                         <version>2.2.1</version>
                         <executions>
                             <execution>
-                                <phase>package</phase>
+                                <id>attach-sources</id>
                                 <goals>
                                     <goal>jar-no-fork</goal>
                                 </goals>
@@ -63,7 +46,7 @@
                         <version>2.9.1</version>
                         <executions>
                             <execution>
-                                <phase>package</phase>
+                                <id>attach-javadocs</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -73,9 +56,9 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
                         <executions>
                             <execution>
+                                <id>sign-artifacts</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
@@ -83,21 +66,57 @@
                             </execution>
                         </executions>
                     </plugin>
+
                 </plugins>
             </build>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                </snapshotRepository>
-                <repository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
         </profile>
     </profiles>
-    <modules>
-        <module>micro-common-starter</module>
-    </modules>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>https://github.com/JeffyZhuang/micro-starter</connection>
+        <url>https://github.com/JeffyZhuang/micro-starter.git</url>
+        <developerConnection>https://github.com/JeffyZhuang</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>JeffyZhuang</name>
+            <email>270225738@qq.com</email>
+            <url>https://github.com/JeffyZhuang</url>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- sonatype提供了自动release的插件，这意味着运行mvn clean deploy后不用手动去close-> release了，此插件会自动release我们的项目到Maven中央仓库。 -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
