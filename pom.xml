@@ -10,6 +10,7 @@
 
     <name>micro-starter</name>
     <description>Demo project for Spring Boot</description>
+    <url>https://github.com/JeffyZhuang/micro-starter</url>
 
     <distributionManagement>
         <snapshotRepository>
